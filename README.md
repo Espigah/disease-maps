@@ -66,3 +66,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+# Maps
+
+https://developers.google.com/maps/documentation/javascript/reference
+
+https://developers.google.com/maps/documentation/javascript/reference/polygon#Circle
+
+https://developers.google.com/maps/documentation/javascript/reference/polygon#CircleOptions
+
+https://mapsplatform.googleblog.com/2010/03/introducing-new-google-geocoding-web.html
+
+https://developers.google.com/maps/documentation/javascript/geocoding
