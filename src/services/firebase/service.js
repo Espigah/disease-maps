@@ -1,12 +1,14 @@
 import db from "./broker";
 import firebase from "firebase";
 import moment from "moment";
+
+const COLLECTION = "locations";
 export default {
   getCoordinates() {
     // let citiesRef = db.collection("groceryLists").limitToLast(10);
 
     //.where("users[0].name', '==', 'userName')
-    let cityRef = db.collection("groceryLists");
+    let cityRef = db.collection(COLLECTION);
     //  .where("users[0].name", "==", "userName"); //.doc("uaDZw5I6SKWNQG7XTBBn");
     return cityRef
       .get()
@@ -23,30 +25,19 @@ export default {
         return Promise.reject(err);
       });
   },
-  add() {
-    let cityRef = db.collection("groceryLists");
+  add({ lat, lng }) {
+    let cityRef = db.collection(COLLECTION);
 
     let data = {
       created: firebase.firestore.FieldValue.serverTimestamp(),
       timestamp: Date.now(),
       infected: true,
-      infectedDays: 3,
+      infectedDays: 1,
       local: {
-        lat: -21.805149,
-        lng: -43.5702964,
+        lat: lat,
+        lng: lng,
       },
-      lastSteps: [
-        {
-          date: moment(Date.now()).subtract(1, "day").valueOf(),
-          lat: -22.805149,
-          lng: -45.5702964,
-        },
-        {
-          date: moment(Date.now()).subtract(2, "day").valueOf(),
-          lat: -24.805149,
-          lng: -46.5702964,
-        },
-      ],
+      lastSteps: [],
     };
     return cityRef.add(data);
   },

@@ -7,22 +7,24 @@ export default {
         .map((data) => data.lastSteps)
         .reduce((a, b) => a.concat(b), []);
 
+      let suspicions = dataList
+        .filter((data) => "infected" in data && !data.infected)
+        .map((data) => data.local);
+
       let clumping = [
         {
-          center: {
-            lat: -22.9228481,
-            lng: -43.54955,
-          },
-          radius: 60,
+          lat: -22.9228481,
+          lng: -43.54955,
         },
       ];
       return {
+        suspicions,
         spots,
         clumping,
       };
     });
   },
-  add() {
-    return service.add();
+  add({ lat, lng }) {
+    return service.add({ lat, lng });
   },
 };

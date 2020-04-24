@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Place from "./Place";
+import Location from "./Location";
 function QuestionnaireForm() {
   return (
     <div>
@@ -10,7 +10,7 @@ function QuestionnaireForm() {
           lugar)
         </p>
 
-        <Place></Place>
+        <Location></Location>
       </div>
     </div>
   );

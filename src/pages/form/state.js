@@ -1,7 +1,7 @@
 import immer from "immer";
 
 const initialState = {
-  infected: false,
+  infected: null,
   period: null,
   local: null,
   lastSteps: [],

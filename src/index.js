@@ -12,8 +12,23 @@ import * as serviceWorker from "./serviceWorker";
 import FormPage from "./pages/form";
 import MapsPage from "./pages/maps";
 
+import {
+  Grid,
+  Button,
+  FormControl,
+  AppBar,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+
 ReactDOM.render(
   <React.StrictMode>
+    <AppBar position="static">
+      {" "}
+      <Toolbar>
+        <Typography variant="h6">Covid</Typography>
+      </Toolbar>
+    </AppBar>
     <Router>
       <Switch>
         <Route exact path="/">
