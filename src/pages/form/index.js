@@ -13,7 +13,11 @@ import { Grid, Button, FormControl, CircularProgress } from "@material-ui/core";
 
 import firebase from "../../services/firebase";
 
+import ReactGA from "react-ga";
+
 function FormPage() {
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   const history = useHistory();
   const [isSending, setIsSending] = useState(false);
   const [coords, setCoords] = useState(false);
@@ -73,11 +77,13 @@ function FormPage() {
       },
       (error) => {
         console.log(JSON.stringify(error));
+        alert("Error:"+JSON.stringify(error));
       }
     );
   }, []);
 
   const saveLocation = useCallback(async () => {
+    console.log("[ saveLocation ]",isSending, coords)
     // don't send again while we are sending
     if (isSending || !coords) return;
     // update state
