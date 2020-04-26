@@ -16,11 +16,11 @@ function Question(props) {
           control={<Radio />}
           label="Estou infectado"
         />
-        {/* <FormControlLabel
+        <FormControlLabel
           value="0"
           control={<Radio />}
           label="Conheco alguem infectado"
-        /> */}
+        />
       </RadioGroup>
     </Grid>
   );

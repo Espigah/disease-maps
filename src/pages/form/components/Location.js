@@ -1,27 +1,58 @@
+import { Grid, TextField } from "@material-ui/core";
 import React from "react";
+import DropDownCity from "./DropDownCity";
+import DropdownNeighborhood from "./DropdownNeighborhood";
+import InputPostalCode from "./InputPostalCode";
 
-import { TextField, Grid } from "@material-ui/core";
+import { connect } from "react-redux";
 
-function LocationForm(props) {
+function LocationForm({ location , locationPin, namespace}) {
+  const { city, street, neighborhood, number } = location;
+
+  const onChangeNumber = (event) => {
+    event.stopPropagation();
+    //event.currentTarget.value;
+  };
   return (
-    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+    <Grid
+      container
+      direction="row"
+      justify="flex-start"
+      alignItems="flex-start"
+    >
+     
+      
       <Grid item xs={4}>
-        <TextField id="code" label="Cep"  />
+        <InputPostalCode onChange={onChangeNumber} namespace={namespace}></InputPostalCode>
       </Grid>
       <Grid item xs={4}>
-        <TextField id="city" label="Cidade"   />
+        <DropDownCity value={city} onChange={onChangeNumber} />
       </Grid>
       <Grid item xs={4}>
-        <TextField id="neighborhood" label="Bairro"  />
+        <DropdownNeighborhood value={neighborhood} onChange={onChangeNumber} />
       </Grid>
       <Grid item xs={4}>
-        <TextField id="street" label="Rua"  />
+        <TextField
+          id="street"
+          label="Rua"
+          value={street}
+          onChange={onChangeNumber}
+        />
       </Grid>
       <Grid item xs={2}>
-        <TextField id="number" label="Número"  />
+        <TextField
+          id="number"
+          label="Número"
+          value={number}
+          onChange={onChangeNumber}
+        />
       </Grid>
     </Grid>
   );
 }
 
-export default LocationForm;
+const mapStateToProps = ({ location, locationPin }) => ({
+  location,
+  locationPin,
+});
+export default connect(mapStateToProps)(LocationForm);

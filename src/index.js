@@ -12,36 +12,26 @@ import * as serviceWorker from "./serviceWorker";
 import FormPage from "./pages/form";
 import MapsPage from "./pages/maps";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
+import { Provider } from "react-redux";
+import { Store } from "./store";
+import NavBar from "./components/NavBar";
 
-import {
-  Grid,
-  Button,
-  FormControl,
-  AppBar,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
-
-
-ReactGA.initialize('UA-163949985-1');
+ReactGA.initialize("UA-163949985-1");
 ReactDOM.render(
-  
   <React.StrictMode>
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6">Covid19</Typography>
-      </Toolbar>
-    </AppBar>
     <Router>
+      <NavBar></NavBar>
       <Switch>
-        <Route exact path="/">
-          <FormPage />
-        </Route>
-        <Route path="/map">
-          <MapsPage />
-        </Route>
+        <Provider store={Store}>
+          <Route exact path="/">
+            <FormPage />
+          </Route>
+          <Route path="/map">
+            <MapsPage />
+          </Route>
+        </Provider>
       </Switch>
     </Router>
   </React.StrictMode>,

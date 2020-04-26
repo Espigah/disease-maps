@@ -1,21 +1,17 @@
 import React from "react";
 
-import { Typography, Grid, TextField, Button } from "@material-ui/core";
+import { Typography, Grid, Button } from "@material-ui/core";
 
 import { withStyles } from "@material-ui/core/styles";
 
 import Location from "./Location";
 
 import { addLocationItem } from "../../../store/locationList/actions";
-
-import { changeFormState } from "../../../store/formForInfected/actions";
-
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { LOCATION_NAMESPACE_LOCATION } from "../../../store/location/namespaces";
+import { LOCATION_NAMESPACE_PIN } from "../../../store/location/namespaces";
 
-const background = "linear-gradient(45deg, #6beafe 30%, #79e0ff 90%)";
-
+const background = "linear-gradient(45deg, #e0b002 30%, #f3ab28 90%)";
 const styles = {
   root: {
     background: background,
@@ -28,20 +24,18 @@ const styles = {
   },
 };
 
-function LocationForm(props) {
+function PinForm(props) {
   const { classes } = props;
-  const { addLocationItem, location, changeFormState } = props;
-
+  const { addLocationItem, location } = props;
   return (
     <div className={classes.root}>
-      <Typography variant="h4" component="h5">
-        Onde você está agora?
+      <Typography variant="h5" component="h6">
+        Adicione os últimos lugares que você frequentou
+        <br />
+        (iniciando do últimoss lugar)
       </Typography>
       <div>
-        <Location namespace={LOCATION_NAMESPACE_LOCATION}></Location>
-        <Grid item xs={2}>
-          <TextField id="number" type="number" label="Dias infectados" />
-        </Grid>
+        <Location namespace={LOCATION_NAMESPACE_PIN}></Location>
       </div>
       <Grid container direction="row" justify="flex-end" alignItems="flex-end">
         <Button
@@ -51,12 +45,11 @@ function LocationForm(props) {
             addLocationItem({
               label: `[ ${location.postalCode} ] ${location.street}`,
               background,
-              removeEnabled: false,
+              removeEnabled: true,
             });
-            changeFormState({ local: location });
           }}
         >
-          Confirmar
+          Adicionar
         </Button>
       </Grid>
     </div>
@@ -64,12 +57,12 @@ function LocationForm(props) {
 }
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addLocationItem, changeFormState }, dispatch);
+  bindActionCreators({ addLocationItem }, dispatch);
 
-const mapStateToProps = ({ location }) => ({
-  location,
+const mapStateToProps = (store) => ({
+  location: store.location,
 });
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(LocationForm));
+)(withStyles(styles)(PinForm));
